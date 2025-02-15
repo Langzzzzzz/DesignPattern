@@ -14,5 +14,15 @@ A class in your program should have just a single instance available to all clie
 - `Abstract Factories`, `Builders` and `Prototypes` can all be implemented as `Singletons`.
 - If you somehow managed to reduce all shared states of the objects to just one flyweight object. `Flyweight` would resemble `Singleton`.
 
+### 🚀 Which One Should You Use for Singleton?
+
+| Feature            | `std::mutex` | `std::call_once` | `std::shared_ptr` |
+|--------------------|-------------|------------------|--------------------|
+| **Thread safety**  | ✅ Yes      | ✅ Yes (Better) | ❌ No (Needs mutex) |
+| **Performance**    | ⚡ Slower (locks every time) | 🚀 Faster (one-time execution) | 🚀 Fast (but needs mutex for safety) |
+| **Memory Management** | ❌ Manual `delete` needed | ❌ Manual `delete` needed | ✅ Automatic cleanup |
+| **Best Use Case**  | Frequent `getInstance()` calls | One-time initialization | Memory-safe Singleton |
+
+---
 ### reference:
 https://refactoring.guru/design-patterns/singleton
